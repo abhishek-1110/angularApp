@@ -1,0 +1,158 @@
+<style>
+  * {
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    margin: auto;
+    max-width: 600px;
+    /* Set a maximum width for the container */
+    /* min-height: 100vh; */
+    /* Ensure the container fills the height of the viewport */
+    border: 1.5px solid #8f8686;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    /* margin: 20px; */
+    /* 
+        -webkit-box-shadow: 15px 10px 11px -2px rgba(166, 159, 166, 0.87);
+        -moz-box-shadow: 15px 10px 11px -2px rgba(189, 127, 189, 0.87); */
+    box-shadow: 0 3px 10px rgb(0 0 0 / 5);
+  }
+
+  .form {
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    margin: 10px;
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.32);
+    -webkit-backdrop-filter: blur(50%);
+    backdrop-filter: blur(50%);
+  }
+
+  .links {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  button {
+    margin: 10px;
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: antiquewhite;
+    cursor: pointer;
+  }
+
+  /* body {
+        background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?cs=srgb&dl=pexels-joyston-judah-933054.jpg&fm=jpg");
+        background-size: cover;
+        min-height: 100vh;
+        background-attachment: fixed;
+    } */
+
+  ::placeholder {
+    color: #fff;
+  }
+
+  @media (min-width: 768px) {
+
+    /* For screens wider than 768px */
+    .container {
+      width: 70%;
+      background-repeat: no-repeat;
+      background-position: fixed;
+      /* Set a wider width for larger screens */
+    }
+  }
+
+  @media (min-width: 992px) {
+
+    /* For screens wider than 992px */
+    .container {
+      width: 30%;
+      /* Set an even wider width for even larger screens */
+      background-repeat: no-repeat;
+      background-position: fixed;
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    /* For screens narrower than 480px */
+    .container {
+      width: 100%;
+      background-repeat: no-repeat;
+      background-position: fixed;
+      /* Set a full-width layout for smaller screens */
+    }
+  }
+
+  .bg-image {
+    background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?cs=srgb&dl=pexels-joyston-judah-933054.jpg&fm=jpg");
+    background-size: cover;
+    min-height: 100vh;
+    background-attachment: fixed;
+    filter: blur(8px);
+  }
+</style>
+
+<body>
+  <div class="bg-image" style="margin: 0px; padding: 0px"></div>
+  <div class="container">
+    <div style="text-align: center; margin-top: 50px; color: #fff">
+      <h5>CREATE ACCOUNT</h5>
+      <form [formGroup]='signupForm' (ngSubmit)='signupUser()'>
+        <div class="form">
+          <!-- <h4 style="text-align: center; padding: 10px;">Have an account?</h4> -->
+          <div class="userLogo">
+            <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+              style="height: 10rem; width: 10rem" />
+          </div>
+          <input type="email" placeholder="Username" style="color: #fff" name="user" formControlName="user" />
+          <span style="font-size: 12px; color: #fff" *ngIf="user && user.invalid && user.touched">Please enter valid
+            email</span>
+          <input type="password" placeholder="Password" style="color: #fff" name="password"
+            formControlName="password" />
+
+          <span style="font-size: 12px; color: #fff" *ngIf="password && password.invalid && password.touched">Please
+            enter valid Password</span>
+          <input type="password" placeholder="Confirm Password" style="color: #fff" name="password"
+            formControlName="confirmPassword" />
+
+          <span style="font-size: 12px; color: #fff"
+            *ngIf="confirmPassword && confirmPassword.invalid && confirmPassword.touched">Please enter valid Confirm
+            Password</span>
+          <!-- <span style="font-size: 12px; color: #fff"
+                        *ngIf="password && password.invalid && password.touched">Wrong password format</span> -->
+
+          <button [disabled]="signupForm.invalid">SIGN UP</button>
+
+
+          <div style="text-align: center">--OR--</div>
+          <button type="button" (click)="goToSignIn()">SIGN IN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div></div>
+</body>

@@ -1,0 +1,9 @@
+<p>child works!</p>
+<input
+  type="text"
+  placeholder="Enter some text to update parent component from child"
+  #box
+  style="width: 30%"
+/><br /><br />
+<button (click)="updateDataEvent.emit(box.value)">Click me to update!</button>
+

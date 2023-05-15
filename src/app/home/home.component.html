@@ -1,0 +1,14 @@
+<div class="home">
+    <div class="loggedInUserInfo">
+        <b>Hii</b>,&nbsp;<p>{{email}}</p>
+    </div>
+    <h4>User information...</h4>
+    <ul>
+        <li *ngFor="let user of usersData">
+            {{user.name}}
+        </li>
+    </ul>
+
+</div>
+
+<app-footer></app-footer>

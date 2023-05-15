@@ -1,0 +1,7 @@
+.home {
+    padding: 30px;
+}
+
+.loggedInUserInfo {
+    display: flex;
+}
