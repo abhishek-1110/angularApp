@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LocalStorageInfoService } from '../services/local-storage-info.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private router: Router) {}
+  usersData: any;
+  constructor(private router: Router, private localStorageInfo: LocalStorageInfoService) {
+    // console.log("Login data", localStorageInfo);
+  }
 
   title = 'reactive sign in form';
   loginForm = new FormGroup({
@@ -23,6 +27,9 @@ export class LoginComponent {
     ]),
   });
 
+  inputEmail = '';
+  inputPassword = '';
+
   loginUser() {
     // console.warn(this.loginForm.value);
     if (
@@ -32,16 +39,34 @@ export class LoginComponent {
       alert("Fields can't be empty.");
       return;
     }
+
+    this.inputEmail = this.loginForm.get('user')?.value || '';
+    this.inputPassword = this.loginForm.get('password')?.value || '';
+
     console.log('Username:', this.loginForm.get('user')?.value);
     console.log('Password:', this.loginForm.get('password')?.value);
-    // alert('login done');
 
-    this.router.navigate(['/home'], {
-      queryParams: {
-        email: this.loginForm.get('user')?.value,
-        password: this.loginForm.get('password')?.value,
-      },
-    });
+    if (localStorage.getItem('usersData') === null) {
+      alert('No user found.. Please sign up');
+      return;
+    } else {
+      this.usersData = this.localStorageInfo.getData();
+      // console.log(this.usersData);
+    }
+
+    for (let i = 0; i < this.usersData.length; i++) {
+      if (
+        this.usersData[i].email == this.inputEmail &&
+        this.usersData[i].password == this.inputPassword
+      ) {
+        this.router.navigate(['/home'], {
+          queryParams: {
+            email: this.loginForm.get('user')?.value,
+            password: this.loginForm.get('password')?.value,
+          },
+        });
+      }
+    }
   }
 
   // getter method

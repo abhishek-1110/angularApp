@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class ApicallService {
-  URL = "https://jsonplaceholder.typicode.com/posts";
+  URL = "https://jsonplaceholder.typicode.com/users";
 
   constructor(private http: HttpClient) { }
 

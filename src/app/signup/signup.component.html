@@ -128,10 +128,10 @@
             <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
               style="height: 10rem; width: 10rem" />
           </div>
-          <input type="email" placeholder="Username" style="color: #fff" name="user" formControlName="user" />
+          <input type="email" placeholder="Email" autocomplete="email" style="color: #fff" name="user" formControlName="user" />
           <span style="font-size: 12px; color: #fff" *ngIf="user && user.invalid && user.touched">Please enter valid
             email</span>
-          <input type="password" placeholder="Password" style="color: #fff" name="password"
+          <input type="password" placeholder="Password" autocomplete="current-password" style="color: #fff" name="password"
             formControlName="password" />
 
           <span style="font-size: 12px; color: #fff" *ngIf="password && password.invalid && password.touched">Please
