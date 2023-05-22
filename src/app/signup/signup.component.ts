@@ -9,7 +9,10 @@ import { LocalStorageInfoService } from '../services/local-storage-info.service'
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  constructor(private router: Router, private localStorageInfo: LocalStorageInfoService) {}
+  constructor(
+    private router: Router,
+    private localStorageInfo: LocalStorageInfoService
+  ) {}
 
   // ls  : LocalStorageInfoService = new LocalStorageInfoService();
   title = 'reactive sign up form';
@@ -27,9 +30,10 @@ export class SignupComponent {
     ]),
   });
 
-
   usersData: any;
   temp: any = '';
+
+  alreadyRegistered : boolean = false;
 
   signupUser() {
     if (
@@ -44,7 +48,19 @@ export class SignupComponent {
         this.usersData = [];
         localStorage.setItem('usersData', JSON.stringify(this.usersData));
       }
+
       this.temp = JSON.parse(localStorage.getItem('usersData') || '');
+      this.temp.filter((x:any) => {
+        if (x.email == this.signupForm.get('user')?.value) {
+          this.alreadyRegistered = true;
+        }
+        if (this.alreadyRegistered == true) {
+          return;
+        }
+      });
+
+      
+
       this.temp.push({
         email: this.signupForm.get('user')?.value,
         password: this.signupForm.get('password')?.value,

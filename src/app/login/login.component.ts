@@ -10,7 +10,10 @@ import { LocalStorageInfoService } from '../services/local-storage-info.service'
 })
 export class LoginComponent {
   usersData: any;
-  constructor(private router: Router, private localStorageInfo: LocalStorageInfoService) {
+  constructor(
+    private router: Router,
+    private localStorageInfo: LocalStorageInfoService
+  ) {
     // console.log("Login data", localStorageInfo);
   }
 
@@ -29,6 +32,7 @@ export class LoginComponent {
 
   inputEmail = '';
   inputPassword = '';
+  found : Boolean = false;
 
   loginUser() {
     // console.warn(this.loginForm.value);
@@ -48,17 +52,16 @@ export class LoginComponent {
 
     if (localStorage.getItem('usersData') === null) {
       alert('No user found.. Please sign up');
+      this.router.navigate(['/signup']);
       return;
     } else {
       this.usersData = this.localStorageInfo.getData();
       // console.log(this.usersData);
     }
 
-    for (let i = 0; i < this.usersData.length; i++) {
-      if (
-        this.usersData[i].email == this.inputEmail &&
-        this.usersData[i].password == this.inputPassword
-      ) {
+    this.usersData.filter((x: any) => {
+      if (x.email == this.inputEmail && x.password == this.inputPassword) {
+        this.found = true;
         this.router.navigate(['/home'], {
           queryParams: {
             email: this.loginForm.get('user')?.value,
@@ -66,7 +69,26 @@ export class LoginComponent {
           },
         });
       }
+    });
+
+    if (this.found === false) {
+      alert("User not found. Please sign up first.")
+      this.router.navigate(['/signup']);
     }
+
+    // for (let i = 0; i < this.usersData.length; i++) {
+    //   if (
+    //     this.usersData[i].email == this.inputEmail &&
+    //     this.usersData[i].password == this.inputPassword
+    //   ) {
+    //     this.router.navigate(['/home'], {
+    //       queryParams: {
+    //         email: this.loginForm.get('user')?.value,
+    //         password: this.loginForm.get('password')?.value,
+    //       },
+    //     });
+    //   }
+    // }
   }
 
   // getter method

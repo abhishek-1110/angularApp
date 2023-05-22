@@ -11,10 +11,27 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [AppComponent, ChildComponent, LoginComponent, SignupComponent, HomeComponent, FooterComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    ChildComponent,
+    LoginComponent,
+    SignupComponent,
+    HomeComponent,
+    FooterComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+  ],
   exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent],

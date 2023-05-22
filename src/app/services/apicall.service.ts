@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApicallService {
-  URL = "https://jsonplaceholder.typicode.com/users";
+  URL = 'https://jsonplaceholder.typicode.com/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   posts() {
     return this.http.get(this.URL);
